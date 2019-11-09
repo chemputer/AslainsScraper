@@ -1,0 +1,13 @@
+# Byte-compiled / DLL files
+__pycache__/
+
+# Distribution / packaging
+dist/
+build/
+
+# PyInstaller
+*.manifest
+*.spec
+
+# IDE
+.idea/
