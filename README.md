@@ -22,6 +22,11 @@ optional arguments:
                                                  it's already downloaded
 ```
 
+## Disclaimer
+
+In v1.0.0, the program options must be present in your system PATH variable. [Here's a guide on how to add to your PATH
+variable](https://helpdeskgeek.com/windows-10/add-windows-path-environment-variable/).
+
 ## Examples
 
 Download the mod pack using Internet Download Manager (IDM)
