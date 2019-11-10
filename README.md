@@ -1,4 +1,4 @@
-# AslainsScraper
+# AslainsScraper v1.1.0
 Automatically downloads the latest version of Aslain's Mod Pack for World of Warships.
 
 Contains options for different programs to download, including Chrome, Firefox, Edge, and IDM. Also includes an option for the user to specify another program.
