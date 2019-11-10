@@ -27,6 +27,7 @@ __status__ = 'Production'
 version_file = os.path.join(os.environ['localappdata'], 'AslainsScraper', 'latest')
 link = 'https://aslain.com/index.php?/topic/2020-0891-aslains-wows-modpack-installer-wpicture-preview/'
 vpath = '//*[@id="comment-10458_wrap"]/div[2]/div[1]/p[5]/span/span/strong/text()'
+adflypath = '//*[@id="comment-10458_wrap"]/div[2]/div[1]/p[6]/strong/a/@href'
 dlpath = '//*[@id="comment-10458_wrap"]/div[2]/div[1]/p[6]/strong/span[2]/a/@href'
 
 
@@ -62,6 +63,8 @@ parser.add_argument('-O', '--other', help='Specify a program to use to download 
                                           'path if not in the system PATH variable')
 parser.add_argument('-A', '--args', help='Add other arguments when using another program. They will be called before '
                                          'the download link', dest='flags')
+parser.add_argument('-S', '--adfly', help='Use the ad.fly link to support Aslain. Does not work with IDM',
+                    default=False, action='store_true')
 parser.add_argument('-F', '--force', help='Forcefully download the latest version, even if it\'s already downloaded',
                     default=False, action='store_true')
 parser.add_argument('-V', '--version', help='Doesn\'t download the mod pack. Just compare local version against latest',
@@ -87,8 +90,11 @@ if args.version:
 if version_release == last_downloaded and not args.force:
     print('You already have the most recent version!')
     sys.exit(0)
+if args.adfly and args.program == 'idm':
+    print('Adfly links and IDM are not compatible with each other')
+    sys.exit(2)
 
-dl_link = tree.xpath(dlpath)[0]
+dl_link = tree.xpath(adflypath)[0] if args.adfly else tree.xpath(dlpath)[0]
 
 prog_paths = {
     'chrome': os.path.join(os.environ['programfiles(x86)'], 'Google', 'Chrome', 'Application', 'chrome.exe'),
