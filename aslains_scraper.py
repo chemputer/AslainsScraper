@@ -64,6 +64,8 @@ parser.add_argument('-A', '--args', help='Add other arguments when using another
                                          'the download link', dest='flags')
 parser.add_argument('-F', '--force', help='Forcefully download the latest version, even if it\'s already downloaded',
                     default=False, action='store_true')
+parser.add_argument('-V', '--version', help='Doesn\'t download the mod pack. Just local version against latest',
+                    default=False, action='store_true')
 args = parser.parse_args()
 
 create_appdata_file()
@@ -76,6 +78,12 @@ print('Latest version:', version_release)
 last_downloaded = get_last_download_version()
 if last_downloaded == '': last_downloaded = 'No file downloaded'
 print('Last downloaded:', last_downloaded)
+if args.version:
+    if version_release == last_downloaded:
+        print('You are up to date')
+    else:
+        print('You are not up to date')
+    sys.exit(0)
 if version_release == last_downloaded and not args.force:
     print('You already have the most recent version!')
     sys.exit(0)
