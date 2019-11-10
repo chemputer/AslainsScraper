@@ -64,7 +64,7 @@ parser.add_argument('-A', '--args', help='Add other arguments when using another
                                          'the download link', dest='flags')
 parser.add_argument('-F', '--force', help='Forcefully download the latest version, even if it\'s already downloaded',
                     default=False, action='store_true')
-parser.add_argument('-V', '--version', help='Doesn\'t download the mod pack. Just local version against latest',
+parser.add_argument('-V', '--version', help='Doesn\'t download the mod pack. Just compare local version against latest',
                     default=False, action='store_true')
 args = parser.parse_args()
 

@@ -20,6 +20,8 @@ optional arguments:
                                                  called before the download link
   -F, --force                                    Forcefully download the latest version, even if
                                                  it's already downloaded
+  -V, --version                                  Doesn't download the mod pack. Just compare local version against
+                                                 the latest
 ```
 
 ## Disclaimer
