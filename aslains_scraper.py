@@ -19,7 +19,7 @@ __copyright__ = 'Copyright 2019, Liam Edwards'
 __credits__ = ['Liam Edwards']
 
 __license__ = 'GNU GPL v3.0'
-__version__ = '1.0.0'
+__version__ = '1.0.1'
 __maintainer__ = 'Liam Edwards'
 __email__ = 'edwardsliam77@gmail.com'
 __status__ = 'Production'
