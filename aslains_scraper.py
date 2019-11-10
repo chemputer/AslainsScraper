@@ -82,12 +82,18 @@ if version_release == last_downloaded and not args.force:
 
 dl_link = tree.xpath(dlpath)[0]
 
+prog_paths = {
+    'chrome': os.path.join(os.environ['programfiles(x86)'], 'Google', 'Chrome', 'Application', 'chrome.exe'),
+    'firefox': os.path.join(os.environ['programfiles'], 'Mozilla Firefox', 'firefox.exe'),
+    'idm': os.path.join(os.environ['programfiles(x86)'], 'Internet Download Manager', 'IDMan.exe')
+}
+
 if args.program == 'chrome' or args.program == 'firefox':
-    call([args.program, dl_link])
+    call([prog_paths[args.program], dl_link])
 elif args.program == 'edge':
     call(['start', 'microsoft-edge:' + dl_link], shell=True)
 elif args.program == 'idm':
-    call(['idman', '/n', '/d', dl_link])
+    call([prog_paths[args.program], '/n', '/d', dl_link])
 elif args.program == 'other':
     if args.other is None:
         print('Invalid syntax! Please specify what program you want to use by using --other')
