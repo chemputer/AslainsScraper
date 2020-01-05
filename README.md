@@ -1,4 +1,4 @@
-# AslainsScraper
+# AslainsScraper v1.1.0
 Automatically downloads the latest version of Aslain's Mod Pack for World of Warships.
 
 Contains options for different programs to download, including Chrome, Firefox, Edge, and IDM. Also includes an option for the user to specify another program.
@@ -18,8 +18,11 @@ optional arguments:
                                                  Use the program's full path if not in the system PATH variable
   -A, --args FLAGS                               Add other arguments when using another program. They will be
                                                  called before the download link
+  -S, --adfly                                    Use the ad.fly link to support Aslain. Does not work with IDM
   -F, --force                                    Forcefully download the latest version, even if
                                                  it's already downloaded
+  -V, --version                                  Doesn't download the mod pack. Just compare local version against
+                                                 the latest
 ```
 
 ## Disclaimer
