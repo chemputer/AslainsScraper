@@ -56,6 +56,12 @@ def flatten(coll):
             yield i
 
 
+def run_latest_version(download_location, last_version):
+    file = os.path.join(download_location, 'Aslains_WoWs_Modpack_Installer_'
+                        + last_version.replace('#', '_').replace('v', 'v.') + '.exe')
+    os.system(file)
+
+
 parser = argparse.ArgumentParser(description='Downloads the latest Aslain\'s WoWS Mod Pack')
 parser.add_argument('-P', '--program', help='Which program to use to download the mod pack (default: chrome)',
                     choices=['chrome', 'firefox', 'edge', 'idm', 'other'], default='chrome')
@@ -63,6 +69,9 @@ parser.add_argument('-O', '--other', help='Specify a program to use to download 
                                           'path if not in the system PATH variable')
 parser.add_argument('-A', '--args', help='Add other arguments when using another program. They will be called before '
                                          'the download link', dest='flags')
+parser.add_argument('-D', '--downloaded', help='If the latest version has already been downloaded, run it. Specify the'
+                                               ' download location (defaults to Windows Downloads folder)',
+                    const=os.path.join('C:', os.environ['homepath'], 'Downloads'), nargs='?', dest='path')
 parser.add_argument('-S', '--adfly', help='Use the ad.fly link to support Aslain. Does not work with IDM',
                     default=False, action='store_true')
 parser.add_argument('-F', '--force', help='Forcefully download the latest version, even if it\'s already downloaded',
@@ -89,6 +98,9 @@ if args.version:
     sys.exit(0)
 if version_release == last_downloaded and not args.force:
     print('You already have the most recent version!')
+    if args.path is not None:
+        print('Running the latest version now!')
+        run_latest_version(args.path, last_downloaded)
     sys.exit(0)
 if args.adfly and args.program == 'idm':
     print('Adfly links and IDM are not compatible with each other')
