@@ -5,7 +5,7 @@ Contains options for different programs to download, including Chrome, Firefox, 
 
 ```text
 aslains_scraper --help
-usage: aslains_scraper [-h] [-P {chrome,firefox,edge,idm,other}] [-O OTHER]
+usage: aslains_scraper [-h] [-P {chrome,firefox,edge,idm,wget,other}] [-O OTHER]
                        [-A FLAGS] [-F]
 
 Downloads the latest Aslain's WoWS Mod Pack
