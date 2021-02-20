@@ -16,6 +16,7 @@ import sys
 
 ########################################################
 ## Original Code Credits & Information -- code has been updated since then.
+''' 
 __author__ = 'Liam Edwards'
 __copyright__ = 'Copyright 2019, Liam Edwards'
 __credits__ = ['Liam Edwards']
@@ -24,7 +25,16 @@ __license__ = 'GNU GPL v3.0'
 __version__ = '1.0.1'
 __maintainer__ = 'Liam Edwards'
 __email__ = 'edwardsliam77@gmail.com'
-__status__ = 'Production'
+__status__ = 'Production' '''
+#########################################################
+
+#########################################################
+## Current Code Credits & Info for fork
+__author__ = 'Chemputer'
+__version__ = "1.3.0"
+__maintainer__ = 'Chemputer'
+__status__ = '\"Production\"'
+__credits__ = ['Liam Edwards', 'Chemputer']
 #########################################################
 
 
