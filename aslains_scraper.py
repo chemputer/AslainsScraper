@@ -14,6 +14,8 @@ import re
 import requests
 import sys
 
+########################################################
+## Original Code Credits & Information -- code has been updated since then.
 __author__ = 'Liam Edwards'
 __copyright__ = 'Copyright 2019, Liam Edwards'
 __credits__ = ['Liam Edwards']
@@ -23,12 +25,14 @@ __version__ = '1.0.1'
 __maintainer__ = 'Liam Edwards'
 __email__ = 'edwardsliam77@gmail.com'
 __status__ = 'Production'
+#########################################################
+
 
 version_file = os.path.join(os.environ['localappdata'], 'AslainsScraper', 'latest')
-link = 'https://aslain.com/index.php?/topic/2020-0891-aslains-wows-modpack-installer-wpicture-preview/'
-vpath = '//*[@id="comment-10458_wrap"]/div[2]/div[1]/p[5]/span/span/strong/text()'
-adflypath = '//*[@id="comment-10458_wrap"]/div[2]/div[1]/p[6]/strong/a/@href'
-dlpath = '//*[@id="comment-10458_wrap"]/div[2]/div[1]/p[6]/strong/span[2]/a/@href'
+link = 'https://aslain.com/index.php?/topic/2020-download-%E2%98%85-world-of-warships-%E2%98%85-modpack/'
+vpath = '//*[@id="comment-10458_wrap"]/div[2]/div[1]/p[6]/span[2]/span/strong/text()'
+adflypath = '//*[@id="comment-10458_wrap"]/div[2]/div[1]/p[9]/a/@href'
+dlpath = '//*[@id="comment-10458_wrap"]/div[2]/div[1]/p[9]/span/a/@href'
 
 
 def create_appdata_file():
@@ -64,7 +68,7 @@ def run_latest_version(download_location, last_version):
 
 parser = argparse.ArgumentParser(description='Downloads the latest Aslain\'s WoWS Mod Pack')
 parser.add_argument('-P', '--program', help='Which program to use to download the mod pack (default: chrome)',
-                    choices=['chrome', 'firefox', 'edge', 'idm', 'other'], default='chrome')
+                    choices=['chrome', 'firefox', 'edge', 'idm', 'wget', 'other'], default='chrome')
 parser.add_argument('-O', '--other', help='Specify a program to use to download the mod pack. Use the program\'s full '
                                           'path if not in the system PATH variable')
 parser.add_argument('-A', '--args', help='Add other arguments when using another program. They will be called before '
@@ -85,7 +89,7 @@ create_appdata_file()
 page = requests.get(link)
 tree = html.fromstring(page.content)
 
-version_release = re.sub(r'\s', '', ''.join(tree.xpath(vpath)[1:]))
+version_release = re.sub(r'\s', '', ''.join(tree.xpath(vpath)[0][1:]))
 print('Latest version:', version_release)
 last_downloaded = get_last_download_version()
 if last_downloaded == '': last_downloaded = 'No file downloaded'
@@ -111,7 +115,6 @@ dl_link = tree.xpath(adflypath)[0] if args.adfly else tree.xpath(dlpath)[0]
 prog_paths = {
     'chrome': os.path.join(os.environ['programfiles(x86)'], 'Google', 'Chrome', 'Application', 'chrome.exe'),
     'firefox': os.path.join(os.environ['programfiles'], 'Mozilla Firefox', 'firefox.exe'),
-    'idm': os.path.join(os.environ['programfiles(x86)'], 'Internet Download Manager', 'IDMan.exe')
 }
 
 if args.program == 'chrome' or args.program == 'firefox':
@@ -119,7 +122,9 @@ if args.program == 'chrome' or args.program == 'firefox':
 elif args.program == 'edge':
     call(['start', 'microsoft-edge:' + dl_link], shell=True)
 elif args.program == 'idm':
-    call([prog_paths[args.program], '/n', '/d', dl_link])
+    call(['idm', dl_link], shell=True)
+elif args.program == "wget":
+    call(['wget', dl_link], shell=True)
 elif args.program == 'other':
     if args.other is None:
         print('Invalid syntax! Please specify what program you want to use by using --other')
